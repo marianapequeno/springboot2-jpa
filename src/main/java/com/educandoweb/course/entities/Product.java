@@ -21,10 +21,15 @@ public class Product implements Serializable {
   private Double price;
   private String imgUrl;
 
-  @Transient
+  @ManyToMany
+  @JoinTable(name = "tb_product_category",
+          joinColumns = @JoinColumn(name = "product_id"),
+          inverseJoinColumns = @JoinColumn(name = "category_id")
+  )
   private Set<Category> categories = new HashSet<>();
 
-  public Product() { }
+  public Product() {
+  }
 
   public Product(Long id, String name, String description, Double price, String imgUrl) {
     Id = id;
@@ -37,6 +42,7 @@ public class Product implements Serializable {
   public Long getId() {
     return Id;
   }
+
   public void setId(Long id) {
     Id = id;
   }
@@ -44,6 +50,7 @@ public class Product implements Serializable {
   public String getName() {
     return name;
   }
+
   public void setName(String name) {
     this.name = name;
   }
@@ -51,6 +58,7 @@ public class Product implements Serializable {
   public String getDescription() {
     return description;
   }
+
   public void setDescription(String description) {
     this.description = description;
   }
@@ -58,6 +66,7 @@ public class Product implements Serializable {
   public Double getPrice() {
     return price;
   }
+
   public void setPrice(Double price) {
     this.price = price;
   }
@@ -65,6 +74,7 @@ public class Product implements Serializable {
   public String getImgUrl() {
     return imgUrl;
   }
+
   public void setImgUrl(String imgUrl) {
     this.imgUrl = imgUrl;
   }
